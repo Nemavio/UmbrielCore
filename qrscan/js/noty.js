@@ -29,9 +29,9 @@
         return n;
     }
 	function beeplay(){
-document.getElementById('audioplay').innerHTML='beeplay exec <audio src="beep.ogg" control="control" autoplay>NoSupport</audio>';
+		soundManager.play('Beep','beep.ogg');
 }	function beepbeeplay(){
-document.getElementById('audioplay').innerHTML='beepbeeplay exec <audio src="beepbeep.ogg" control="control" autoplay>NoSupport</audio>';
+		soundManager.play('BeepBeep','beepbeep.ogg');
 }
 function affMsg(e, m){
 	navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
