@@ -18,7 +18,13 @@ var imghtml='<div id="qrfile"><canvas id="out-canvas" width="320" height="240"><
 '</div>';
 
 var vidhtml = '<video id="v" autoplay></video>';
-
+function getQuerystring(key, default_) {
+       if (default_==null) default_="";
+       key = key.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+       var regex = new RegExp("[\\?&]"+key+"=([^&#]*)");
+       var qs = regex.exec(window.location.href);
+       if(qs == null) return default_; else return qs[1];
+   }
 function dragenter(e) {
   e.stopPropagation();
   e.preventDefault();
@@ -182,9 +188,33 @@ function load()
         '<br><p id="mp2">Navigateur non support&eacute; !</p>';
 	}
 }
-
+//chrome
+function gotSources(sourceInfos) {
+	var videoSelect = document.querySelector('select#videoSource');
+for (var i = 0; i !== sourceInfos.length; ++i) {
+var sourceInfo = sourceInfos[i];
+var option = document.createElement('option');
+option.value = sourceInfo.id;
+ if (sourceInfo.kind === 'audio') {
+ }else
+if (sourceInfo.kind === 'video') {
+option.text = sourceInfo.label || 'camera ' + (videoSelect.length + 1);
+videoSelect.appendChild(option);
+} else {
+console.log('Some other kind of source: ', sourceInfo);
+}
+}
+}
+//end chrome
 function setwebcam()
 {
+	if (typeof MediaStreamTrack.getSources === 'undefined'){
+document.getElementById("select").style.visibility="hidden";
+} else {
+MediaStreamTrack.getSources(gotSources);
+}
+
+
 	document.getElementById("result").innerHTML="<img src=\"scan.gif\"/><br /><div id=\"blink\">En attente</div>";
     if(stype==1)
     {
@@ -195,13 +225,24 @@ function setwebcam()
     document.getElementById("outdiv").innerHTML = vidhtml;
     v=document.getElementById("v");
 
-    if(n.getUserMedia)
-        n.getUserMedia({video: true, audio: false}, success, error);
-    else
+    if(n.getUserMedia){
+	if(getQuerystring('src') != ''){
+			var srcCam = getQuerystring('src');
+		n.getUserMedia({video: {optional: [{sourceId: srcCam}]}, audio: false}, success, error);
+		}else{
+		n.getUserMedia({video: true, audio: false}, success, error);
+		}
+    }else
     if(n.webkitGetUserMedia)
     {
-        webkit=true;
-        n.webkitGetUserMedia({video: true, audio: false}, success, error);
+		webkit = true;
+		if(getQuerystring('src') != ''){
+			var srcCam = getQuerystring('src');
+		n.webkitGetUserMedia({video: {optional: [{sourceId: srcCam}]}, audio: false}, success, error);
+		}else{
+		n.webkitGetUserMedia({video: true, audio: false}, success, error);
+		}
+
     }
     else
     if(n.mozGetUserMedia)

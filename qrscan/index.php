@@ -98,6 +98,10 @@ color:#fff;
       setTimeout("blink()",500);
    }
 </script>
+<script type="text/javascript" src="js/soundmanager/script/soundmanager2.js"></script>
+<script type="text/javascript">
+soundManager.url = 'js/soundmanager/swf/';
+</script>
 </head>
 
 <body>
@@ -111,6 +115,8 @@ color:#fff;
 <td valign="top" align="center" width="50%">
 <table class="tsel" border="0">
 <tr>
+<div class="select" id="select"><form action="index.php" method="get" id="camChange"><label for="videoSource">Video source: </label><select name="src" id="videoSource" onChange="load();"></select></form><button type="submit" form="camChange">changer</button></div>
+
 <td><img class="selector" id="webcamimg" src="vid.png" onclick="setwebcam()" align="left" /></td>
 <td><img class="selector" id="qrimg" src="cam.png" onclick="setimg()" align="right"/></td></tr>
 <tr><td colspan="2" align="center">
