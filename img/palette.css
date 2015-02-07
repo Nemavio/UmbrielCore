@@ -1,0 +1,75 @@
+.skin_barre  /* on reprend le nom qu'on a mis dans 'class=' */
+{
+visibility:hidden;
+width:30px;
+height:300px;
+/* on définit la taille du div (celle de l'image) */
+
+top:20px;
+left:23px;
+/* et sa position initiale */
+
+position:absolute;
+/* le div n'est plus fixe mais libre */
+
+background-image:url('degrade.jpg');
+/* on définit ici l'image à afficher dans le div */
+
+cursor:s-resize;
+/* et enfin on définit le curseur à afficher lorsque la souris passe sur ce div */
+}
+
+/* =====  de même pour les autres  ===== */
+
+.skin_curseur1
+{
+visibility:hidden;
+width:45px;
+height:15px;
+position:absolute;
+top:12px;
+left:15px;
+cursor:s-resize;
+background-image:url('curseur1.png');
+}
+
+.skin_carre
+{
+visibility:hidden;
+width:300px;
+height:300px;
+position:absolute;
+top:20px;left:60px;
+cursor:move;
+background-color:red;  /* on définit la couleur initiale du carré */
+background-image:url('degrade n-b.png');
+}
+
+.skin_curseur2
+{
+visibility:hidden;
+width:20px;
+height:20px;
+position:absolute;
+top:10px;
+left:350px;
+cursor:move;
+background-image:url('curseur2.png');
+}
+
+.skin_resultat
+{
+position:absolute;
+top:330px;
+left:60px;
+border:1px solid black; /* dessine un cadre autour du 'input' noir et d'un pixel d'épaisseur */
+background-color:red;
+text-align:center;  /* on aligne le texte au centre */
+}
+
+.skin_bouton_OK
+{
+position:absolute;
+top:330px;
+left:220px;
+}
