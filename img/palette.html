@@ -1,0 +1,32 @@
+<script language="Javascript" type="text/javascript" src="palette.js"></script>
+<link rel="stylesheet" type="text/css" href="palette.css" /> 
+<script language="Javascript" type="text/javascript">
+ function visibilite(varidamask, linkafich)
+{
+var targetElement;
+targetElement = document.getElementById(varidamask);
+targetAffichLink = document.getElementById(linkafich);
+if (targetElement.style.display == "none")
+{
+targetElement.style.display = "" ;
+targetAffichLink.style.display = "none";
+} else {
+targetElement.style.display = "none" ;
+}
+}
+</script>
+<body onload="chargement_termine()">
+<div id="divpalette" style="display:none;">
+<div id="barre"    class="skin_barre"    onmousedown="clique('barre')"></div>
+<div id="curseur1" class="skin_curseur1" onmousedown="clique('barre')"></div>
+<div id="carre"    class="skin_carre"    onmousedown="clique('carre')"></div>
+<div id="curseur2" class="skin_curseur2" onmousedown="clique('carre')"></div>
+</div>
+<div id="lienafichpal"><a href="javascript:visibilite('divpalette', 'lienafichpal');" id="lienafichpal" style="" >Afficher la palette</a></div>
+<form>
+<input type="text" id="resultat" class="skin_resultat" size=20 name="affichage_couleur" value="Chargement ..." />
+<input type="button" value=" OK " class="skin_bouton_OK" id="bouton_valid" disabled />
+</form>
+
+
+</body>
