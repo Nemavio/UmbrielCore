@@ -9,8 +9,8 @@ if(isset($_SESSION['idbdd'])){
 <head>
 <title><?php echo $varserv['valeur2'];?> - Recherches</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
-<link rel="stylesheet" type="text/css" href="img/style.css">
+<link rel="shortcut icon" type="image/x-icon" href="themes/default/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="themes/default/img/style.css">
 <script language="JavaScript" type="text/javascript">
 function autosubmit()
    {
@@ -23,7 +23,7 @@ function autosubmit()
 <body text="#FFFFFF" link="#FFFF66" vlink="#FFFF99" alink="#FFFF99" style="background-color:#749CAC;" onLoad="document.getElementById('index').focus();" class="active_bg_image">
               <div id="pattern">
 
-  <div id="gradient"><img src="img/bg.jpg" id="background_image" alt="" /><br /><div align="center">
+  <div id="gradient"><img src="themes/default/img/bg.jpg" id="background_image" alt="" /><br /><div align="center">
 <?php
 if(isset($_SESSION['prvlg_user']) && ($_SESSION['prvlg_user'] == "sa")){$bloceven="";}else if(isset($_SESSION['prvlg_user']) && ($_SESSION['prvlg_user'] == "a")){$bloceven="";}else{$bloceven="disabled";}
 if(isset($_SESSION['prvlg_user']) && ($_SESSION['prvlg_user'] == "sa")){$blocuser="";}else{$blocuser="disabled";}
@@ -36,7 +36,7 @@ if(isset($_SESSION['id_user'])){$blocusernoconnect="";}else{$blocusernoconnect="
 <td width="20%" style="vertical-align: top; text-align: left;"><form action="identification.php" method="post"><select name="changeserv" <?php echo $blocusernoconnect; ?> onChange="this.form.submit()"><option value="newserveur">Nouveau Serveur</option><option disabled>- -</option><?php
 mysql_select_db($base, $connexion); 
 							$rechercheserveur=mysql_query('SELECT * FROM '.$tableparam.' WHERE type="serveur"'); 
-								while($datarechercheserveur = mysql_fetch_array($rechercheserveur)){ 
+								while($datarechercheserveur = dFa($rechercheserveur)){ 
 									echo("<option value=\"".$datarechercheserveur['valeur3']."\">".$datarechercheserveur['valeur2']."</option>");
 								}?></select><input name="" value="Changer" type="submit" <?php echo $blocusernoconnect; ?>></form></td>
 <td width="10%" style="vertical-align: top; text-align: right;"><form><input type="button" value="D&eacute;connexion" onClick="self.location.href='identification.php?option=deconnexion'" <?php echo $blocusernoconnect; ?>></form></td></tr></tbody></table>
@@ -45,20 +45,20 @@ mysql_select_db($base, $connexion);
 <?php
 	if(isset($_POST['nom'])){
 			echo("Recherche en cours...");
-			echo("<br /><br /><br /><img src=\"img/load.gif\" />");
+			echo("<br /><br /><br /><img src=\"themes/default/img/load.gif\" />");
 			echo("<meta http-equiv=\"refresh\" content=\"0; URL=utilisateurs.php?lettresn=".$_POST['nom']."\">");
 			//echo("<meta http-equiv=\"refresh\" content=\"0; URL=utilisateurs.php?multinom=".$_POST['nom']."\">");
 	} else if(isset($_POST['prenom'])){
 			echo("Recherche en cours...");
-			echo("<br /><br /><br /><img src=\"img/load.gif\" />");
+			echo("<br /><br /><br /><img src=\"themes/default/img/load.gif\" />");
 			echo("<meta http-equiv=\"refresh\" content=\"0; URL=utilisateurs.php?multiprenom=".$_POST['prenom']."\">");
 	} else if(isset($_POST['id'])){
 			echo("Recherche en cours...");
-			echo("<br /><br /><br /><img src=\"img/load.gif\" />");
+			echo("<br /><br /><br /><img src=\"themes/default/img/load.gif\" />");
 			echo("<meta http-equiv=\"refresh\" content=\"0; URL=utilisateurs.php?utilisateur=".$_POST['id']."\">");
 	} else if(isset($_POST['lettres'])){
 			echo("Recherche en cours...");
-			echo("<br /><br /><br /><img src=\"img/load.gif\" />");
+			echo("<br /><br /><br /><img src=\"themes/default/img/load.gif\" />");
 			echo("<meta http-equiv=\"refresh\" content=\"0; URL=utilisateurs.php?lettresn=".$_POST['lettres']."\">");
 	} else {
 	echo("<form method=\"get\" action=\"utilisateurs.php\" ><p align=\"center\"><u><strong><font size=\"+1\"><em>Rechercher une personne </em></font></strong></u><input name=\"mashup\" type=\"text\" id=\"index\"><input type=\"submit\" name=\"Submit\" value=\"OK\"></form><br /><br /><br />");

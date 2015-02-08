@@ -7,15 +7,15 @@ if(isset($_SESSION['idbdd'])){
 }else{$titrecomplet="UmbrielSystem"; header("Location:identification.php?msg=na");}
 
 ?>
-<html><head><title><?php echo $varserv['valeur2'];?> - Confirmation</title><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
-<link rel="stylesheet" type="text/css" href="img/style.css">
+<html><head><title><?php echo $varserv['valeur2'];?> - Confirmation</title><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><link rel="shortcut icon" type="image/x-icon" href="themes/default/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="themes/default/img/style.css">
 <style>
 table {border-collapse: collapse;}
 </style>
 </head><body text="#FFFFFF" link="#FFFF66" vlink="#FFFF99" alink="#FFFF99" style="background-color:#749CAC;" class="active_bg_image">
 <div id="pattern">
 
-<div id="gradient"><img src="img/bg.jpg" id="background_image" alt="" /><br /><div align="center"><p>
+<div id="gradient"><img src="themes/default/img/bg.jpg" id="background_image" alt="" /><br /><div align="center"><p>
 <?php
 if(isset($_SESSION['prvlg_user']) && ($_SESSION['prvlg_user'] == "sa")){$bloceven="";}else if(isset($_SESSION['prvlg_user']) && ($_SESSION['prvlg_user'] == "a")){$bloceven="";}else{$bloceven="disabled";}
 if(isset($_SESSION['prvlg_user']) && ($_SESSION['prvlg_user'] == "sa")){$blocuser="";}else{$blocuser="disabled";}
@@ -28,7 +28,7 @@ if(isset($_SESSION['id_user'])){$blocusernoconnect="";}else{$blocusernoconnect="
 <td width="20%" style="vertical-align: top; text-align: left;"><form action="identification.php" method="post"><select name="changeserv" <?php echo $blocusernoconnect; ?> onChange="this.form.submit()"><option value="newserveur">Nouveau Serveur</option><option disabled>- -</option><?php
 mysql_select_db($base, $connexion); 
 $rechercheserveur=mysql_query('SELECT * FROM '.$tableparam.' WHERE type="serveur"'); 
-while($datarechercheserveur = mysql_fetch_array($rechercheserveur)){ 
+while($datarechercheserveur = dFa($rechercheserveur)){ 
 	echo("<option value=\"".$datarechercheserveur['valeur3']."\">".$datarechercheserveur['valeur2']."</option>");
 }?></select><input name="" value="Changer" type="submit" <?php echo $blocusernoconnect; ?>></form></td>
 <td width="10%" style="vertical-align: top; text-align: right;"><form><input type="button" value="D&eacute;connexion" onClick="self.location.href='identification.php?option=deconnexion'" <?php echo $blocusernoconnect; ?>></form></td></tr></tbody></table><br />
