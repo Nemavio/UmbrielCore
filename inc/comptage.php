@@ -1,6 +1,7 @@
 <?php
 function comptage($base, $connexion, $tableparam, $idbdd, $connexion, $varserv){
 	global $requete_rentres, $requete_sortis, $requete_nodeclare, $inscrits_total, $argent_total, $personnes_venues;
+	if($varserv['valeur4'] == ""){return false;}
 		$requete_rentres = mysql_num_rows(mysql_query('SELECT id FROM '.$varserv['valeur4'].' WHERE rentre="1" AND sorti="0"'));
 		$requete_sortis = mysql_num_rows(mysql_query('SELECT id FROM '.$varserv['valeur4'].' WHERE rentre="0" AND sorti="1"'));
 		$requete_nodeclare = mysql_num_rows(mysql_query('SELECT id FROM '.$varserv['valeur4'].' WHERE nodeclare="1"'));
