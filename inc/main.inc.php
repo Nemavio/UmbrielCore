@@ -7,6 +7,5 @@ while(false !== ($g = readdir($f)))
 		$n++;
 		include $g;
 	}
-} 
-main();
+}
 ?>
