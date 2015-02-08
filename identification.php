@@ -3,12 +3,12 @@
 ?>
 <html><head>
 <noscript><center><span style='text-align:center;font-size:14pt;line-height:115%;color:white;background:red;'><font face="Arial, Helvetica, sans-serif">JavaScript est désactivé, veuillez l'activer si vous désirez que l'optimisation de la page soit initialisée!</font></span></center><br/></noscript>
-<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
-<link rel="stylesheet" type="text/css" href="img/style.css">
+<link rel="shortcut icon" type="image/x-icon" href="themes/default/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="themes/default/img/style.css">
 <title>Umbriel System</title>
-<script>!window.jQuery && document.write('<script src="img/jquery-1.4.3.min.js"><\/script>');</script>
-<script type="text/javascript" src="img/jquery.fancybox-1.3.4.pack.js"></script>
-<link rel="stylesheet" type="text/css" href="img/jqueryfancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<script>!window.jQuery && document.write('<script src="themes/default/img/jquery-1.4.3.min.js"><\/script>');</script>
+<script type="text/javascript" src="themes/default/img/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="themes/default/img/jqueryfancybox/jquery.fancybox-1.3.4.css" media="screen" />
  <script type="text/javascript">
 		$(document).ready(function() {
 			$(".changemdp").fancybox({
@@ -35,7 +35,7 @@
 			</script></head><body class="active_bg_image">
               <div id="pattern">
 
-  <div id="gradient"><img src="img/bg.jpg" id="background_image" alt="" /><br />
+  <div id="gradient"><img src="themes/default/img/bg.jpg" id="background_image" alt="" /><br />
 <?php
   if(isset($_GET['msg'])){}else{if (isset($_SESSION['id_user'])){}else{echo("<meta http-equiv=\"refresh\" content=\"5; URL=identification.php?msg=na\">");}}
   if(isset($_GET['valeurauto'])){}else{
@@ -48,7 +48,7 @@
           			echo('Umbriel System - Authentification/Param&egrave;trage</u></strong></font></div></td><td style="vertical-align: top; text-align: left;" width="20%"><div id="changeserv"><form action="identification.php" method="post"><select name="changeserv" '.$blocusernoconnect.' onChange="this.form.submit()"><option value="newserveur">Nouveau Serveur</option><option disabled="disabled">- -</option>');
 						mysql_select_db($base, $connexion); 
 							$rechercheserveur=mysql_query('SELECT * FROM '.$tableparam.' WHERE type="serveur"'); 
-								while($datarechercheserveur = mysql_fetch_array($rechercheserveur)){ 
+								while($datarechercheserveur = dFa($rechercheserveur)){ 
 									echo("<option value=\"".$datarechercheserveur['valeur3']."\">".$datarechercheserveur['valeur2']."</option>");
 								}
 					echo('</select><input name="" value="Changer" type="submit" '.$blocusernoconnect.'></form></div></td><td style="vertical-align: top; text-align: right;" width="10%"><div id="logideconect"><form><input value="Déconnexion" onclick="self.location.href=\'identification.php?option=deconnexion\'" type="button" '.$blocusernoconnect.'></form></div></td></tr></tbody></table><br /></div>');
@@ -60,14 +60,14 @@
 			$requeterl=sprintf("SELECT * FROM ".$tableparam." WHERE valeur4='".$login."' AND valeur5='".$mdp."' AND type='utilisateur'");
 			$requeterls1 = mysql_query($requeterl, $connexion) or die(mysql_error());
 				$varrl = mysql_fetch_assoc($requeterls1);
-				$oprl = mysql_num_rows($requeterls1);
+				$oprl = dNr($requeterls1);
 					if(isset($_POST['servbdd'])){
 							if($_POST['servbdd'] == "newserveur"){$dir="newserveur";}else{
 								mysql_select_db($base, $connexion);
 								$requeteserv=sprintf("SELECT * FROM ".$tableparam." WHERE valeur3='".$_POST['servbdd']."' AND type='serveur'");
 								$requeteservs1=mysql_query($requeteserv, $connexion) or die(mysql_error());
 								$varserv=mysql_fetch_assoc($requeteservs1);
-								$opserv=mysql_num_rows($requeteservs1);
+								$opserv=dNr($requeteservs1);
 								}
 						if($oprl){
 							$_SESSION['id_user'] = $varrl['valeur1'];
@@ -80,24 +80,7 @@
 						if($_POST['servbdd'] == "newserveur"){$dir="newserveur";}else{
 							$_SESSION['idbdd'] = $varserv['valeur1'];
 						}
-							 echo("<script language=\"JavaScript\" type=\"text/javascript\">");
-							 echo("if(document.images)");
-							 echo("{");
-							 echo("i1 = new Image();");
-							 echo("i1.src = \"img/delete.png\";");
-							 echo("i2 = new Image();");
-							 echo("i2.src = \"img/entrer.png\";");
-							 echo("i3 = new Image();");
-							 echo("i3.src = \"img/load.gif\";");
-							 echo("i4 = new Image();");
-							 echo("i4.src = \"img/loaderreur.gif\";");
-							 echo("i5 = new Image();");
-							 echo("i5.src = \"img/param.png\";");
-							 echo("i6 = new Image();");
-							 echo("i6.src = \"img/sortir.png\";");
-							 echo("}");
-							 echo("</script>");
-								echo("<center><img src=\"img/us-logo.gif\" width=\"720\" height=\"439\"><br /><br /><br /><img src=\"img/load-connect.gif\"></center>");
+								echo("<center><img src=\"themes/default/img/us-logo.gif\" width=\"720\" height=\"439\"><br /><br /><br /><img src=\"themes/default/img/load-connect.gif\"></center>");
 								if(isset($dir) && ($dir == "newserveur")){
 									echo("<meta http-equiv=\"refresh\" content=\"9; URL=identification.php?option=newserveur\">");
 								}else{
@@ -153,10 +136,10 @@ echo('?</strong></td><td><input type="checkbox" name="telephone" value="1"></td>
 					$tableserveur="us_event_".$nscse."";
 			mysql_select_db($base, $connexion);
 			$recherchesqlexist = mysql_query('SELECT * FROM '.$tableparam.' WHERE valeur3="'.$nscse.'"');
-				if(!mysql_num_rows($recherchesqlexist)){
+				if(!dNr($recherchesqlexist)){
 					mysql_select_db($base, $connexion);
 					$recherchetablesqlexist = mysql_query('SELECT * FROM '.$tableparam.' WHERE valeur4="'.$tableserveur.'"');
-						if(!mysql_num_rows($recherchetablesqlexist)){
+						if(!dNr($recherchetablesqlexist)){
 						mysql_select_db($base, $connexion);
 						$rechercheidserveur = mysql_query('SELECT valeur1 FROM '.$tableparam.' WHERE type="serveur" ORDER BY valeur1 DESC LIMIT 1');
 								$risb = 0;
@@ -164,7 +147,7 @@ echo('?</strong></td><td><input type="checkbox" name="telephone" value="1"></td>
 								$risb++;
 								mysql_select_db($base, $connexion);
 								$nbrofevensearch = mysql_query('SELECT * FROM '.$tableparam.' WHERE type="serveur" AND valeur1="'.$risb.'"');
-								$nbrofevensearchnr = mysql_num_rows($nbrofevensearch);
+								$nbrofevensearchnr = dNr($nbrofevensearch);
 							}while ($nbrofevensearchnr > 0);
 								$idserveur = $risb;
 							if(isset($_GET['demandeautorisationvenir']) && ($_GET['demandeautorisationvenir'] == "1")){$demandeautorisationvenir="1";}else{$demandeautorisationvenir="0";}
@@ -213,7 +196,7 @@ echo('?</strong></td><td><input type="checkbox" name="telephone" value="1"></td>
 </td><td style="vertical-align: top; text-align: right;">
 <input name="" type="button" onClick="self.location.href='identification.php?gestion=utilisateurs&type=suu'" value="Supprimer un utilisateur">
 </td></tr></tbody></table><br /><?php
-					if(mysql_num_rows($tlu) == 0){ 
+					if(dNr($tlu) == 0){ 
 						echo ("<p>Une erreur critique est survenue !</p>"); 
 					}else{ 
 						echo("<center><table style=\"text-align: center; width: 90%; color: #000000;\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#EEEEEE\"><tbody><tr>");
@@ -224,7 +207,7 @@ echo('?</strong></td><td><input type="checkbox" name="telephone" value="1"></td>
 						echo("<td style=\"vertical-align: center;\"><strong><u>Privil&egrave;ge</u></strong></td>");
 						echo("<td style=\"vertical-align: center;\">&nbsp;</td>");
 						echo("<td style=\"vertical-align: center;\">&nbsp;</td>");
-							while($wtlu = mysql_fetch_array($tlu)){
+							while($wtlu = dFa($tlu)){
 									if(isset($_GET['idnewuser']) && ($_GET['idnewuser'] == $wtlu['valeur1'])){$colorcell = "background-color:#CACACA;";}else{$colorcell="";}
 								echo("<tr><td style=\"vertical-align: center; ".$colorcell."\">".$wtlu['valeur1']."</td>");
 								echo("<td style=\"vertical-align: center; ".$colorcell."\">".$wtlu['valeur2']."</td>");
@@ -232,8 +215,8 @@ echo('?</strong></td><td><input type="checkbox" name="telephone" value="1"></td>
 								echo("<td style=\"vertical-align: center; ".$colorcell."\">".$wtlu['valeur4']."</td>");
 									if($wtlu['valeur6'] == "sa"){$prvlg="SuperAdmin";}else if($wtlu['valeur6'] == "a"){$prvlg="Administrateur";}else if($wtlu['valeur6'] == "u"){$prvlg="Utilisateur";}else if($wtlu['valeur6'] == "i"){$prvlg="Invit&eacute;";}else{$prvlg="Aucun droit assign&eacute;!";}
 								echo("<td style=\"vertical-align: center; ".$colorcell."\">".$prvlg."</td>");
-								echo("<td style=\"vertical-align: center; ".$colorcell."\"><a href=\"identification.php?gestion=utilisateurs&type=auu&act=modif&id=".$wtlu['valeur1']."\"><img src=\"img/param.png\"></a></td>");
-								echo("<td style=\"vertical-align: center; ".$colorcell."\"><a href=\"identification.php?415bgfnjhjyj4gfh842666fgfdg45hfgh84tttthhhhhh115666yt6d8888888888seeeef444487yjt77jop41m41hvj=".$wtlu['valeur1']."\"><img src=\"img/delete.png\"></a></td></tr>");
+								echo("<td style=\"vertical-align: center; ".$colorcell."\"><a href=\"identification.php?gestion=utilisateurs&type=auu&act=modif&id=".$wtlu['valeur1']."\"><img src=\"themes/default/img/param.png\"></a></td>");
+								echo("<td style=\"vertical-align: center; ".$colorcell."\"><a href=\"identification.php?415bgfnjhjyj4gfh842666fgfdg45hfgh84tttthhhhhh115666yt6d8888888888seeeef444487yjt77jop41m41hvj=".$wtlu['valeur1']."\"><img src=\"themes/default/img/delete.png\"></a></td></tr>");
 							}
 						echo("</tr></tbody></table></center>");
 					}			
@@ -244,7 +227,7 @@ echo('?</strong></td><td><input type="checkbox" name="telephone" value="1"></td>
 					$requetesearchutilisystem=sprintf("SELECT * FROM ".$tableparam." WHERE valeur1='".$_GET['id']."' AND type='utilisateur'");
 					$requeteservs1searchutilisystem=mysql_query($requetesearchutilisystem, $connexion) or die(mysql_error());
 					$varservsearchutilisystem=mysql_fetch_assoc($requeteservs1searchutilisystem);
-					$opservsearchutilisystem=mysql_num_rows($requeteservs1searchutilisystem);?>
+					$opservsearchutilisystem=dNr($requeteservs1searchutilisystem);?>
 						<table style="text-align: center; width: 100%; margin-left: auto; margin-right: auto;" border="0" cellpadding="0" cellspacing="0">
 						<tbody><tr><td style="vertical-align: top; text-align: left;">
 						<input name="" type="button" onClick="self.location.href='identification.php?gestion=utilisateurs&type=glu'" value="Retour">
@@ -280,7 +263,7 @@ echo('?</strong></td><td><input type="checkbox" name="telephone" value="1"></td>
 					$rekchangemdpus=sprintf("SELECT * FROM ".$tableparam." WHERE valeur1='".$_GET['id']."' AND type='utilisateur'");
 					$rekserv1changemdpus=mysql_query($rekchangemdpus, $connexion) or die(mysql_error());
 					$varservchangemdpus=mysql_fetch_assoc($rekserv1changemdpus);
-					$opservchangemdpus=mysql_num_rows($rekserv1changemdpus);
+					$opservchangemdpus=dNr($rekserv1changemdpus);
 					if($opservchangemdpus > "0"){
 					if($varservchangemdpus['valeur6'] == "sa"){
 						if($varservchangemdpus['valeur1'] == $_SESSION['id_user']){}else{
@@ -331,7 +314,7 @@ echo('?</strong></td><td><input type="checkbox" name="telephone" value="1"></td>
 							if($onbalancelasauce['valeur6']== "sa") echo ">> ";echo $onbalancelasauce['valeur2']; echo " "; echo $onbalancelasauce['valeur3']; echo " ("; echo $onbalancelasauce['valeur4']; echo ")"; if($onbalancelasauce['valeur6']== "sa") echo " <<";
 								echo('</option>');
 						} while ($onbalancelasauce = mysql_fetch_assoc($querydesutilisateurs));
-							$recherchedesutilisateurs = mysql_num_rows($querydesutilisateurs);
+							$recherchedesutilisateurs = dNr($querydesutilisateurs);
 								if($recherchedesutilisateurs > 0) {
 									mysql_data_seek($$querydesutilisateurs, 0);
 									$onbalancelasauce = mysql_fetch_assoc($querydesutilisateurs);}
@@ -351,9 +334,9 @@ echo('?</strong></td><td><input type="checkbox" name="telephone" value="1"></td>
 												$deleteeven = sprintf("DELETE FROM ".$tableparam." WHERE valeur1='".$_POST['suppreven']."' AND type='serveur'"); // Et une dernière requête pour supprimer dans la table paramètres
 												mysql_select_db($base, $connexion);
 												mysql_query($deleteeven, $connexion); //et on la balance
-												echo('<center><img src="img/load.gif"><meta http-equiv="refresh" content="0; URL=identification.php?gestion=choixeven&type=evenements&modiffaite=suppression"></center>');
+												echo('<center><img src="themes/default/img/load.gif"><meta http-equiv="refresh" content="0; URL=identification.php?gestion=choixeven&type=evenements&modiffaite=suppression"></center>');
 											}else{ 
-												echo('<center><br />erreur !<br /><img src="img/loaderreur.gif"><br />'.mysql_error().'</center>');
+												echo('<center><br />erreur !<br /><img src="themes/default/img/loaderreur.gif"><br />'.mysql_error().'</center>');
 											}
 							
 					}else{
@@ -363,7 +346,7 @@ echo('?</strong></td><td><input type="checkbox" name="telephone" value="1"></td>
 		$delete_user = sprintf("DELETE FROM ".$tableparam." WHERE valeur1='".$_POST['suppr']."' AND type='utilisateur'");
 				mysql_select_db($base, $connexion);
 					if(mysql_query($delete_user, $connexion)){
-						echo('<center><img src="img/load.gif"><meta http-equiv="refresh" content="0; URL=identification.php?gestion=utilisateurs&type=glu&modiffaite=suppression"></center>');
+						echo('<center><img src="themes/default/img/load.gif"><meta http-equiv="refresh" content="0; URL=identification.php?gestion=utilisateurs&type=glu&modiffaite=suppression"></center>');
 					}else{
 						echo mysql_error();
 					}
@@ -371,7 +354,7 @@ echo('?</strong></td><td><input type="checkbox" name="telephone" value="1"></td>
 		$delete_user = sprintf("DELETE FROM ".$tableparam." WHERE valeur1='".$_GET['415bgfnjhjyj4gfh842666fgfdg45hfgh84tttthhhhhh115666yt6d8888888888seeeef444487yjt77jop41m41hvj']."' AND type='utilisateur'");
 				mysql_select_db($base, $connexion);
 					if(mysql_query($delete_user, $connexion)){
-						echo('<center><img src="img/load.gif"><meta http-equiv="refresh" content="0; URL=identification.php?gestion=utilisateurs&type=glu&modiffaite=suppression"></center>');
+						echo('<center><img src="themes/default/img/load.gif"><meta http-equiv="refresh" content="0; URL=identification.php?gestion=utilisateurs&type=glu&modiffaite=suppression"></center>');
 					}else{
 						echo mysql_error();
 					}
@@ -384,12 +367,12 @@ echo('?</strong></td><td><input type="checkbox" name="telephone" value="1"></td>
 								$iddi++;
 								mysql_select_db($base, $connexion);
 								$iddisearch = mysql_query('SELECT * FROM '.$tableparam.' WHERE type="utilisateur" AND valeur1="'.$iddi.'"');
-								$iddisearchnr = mysql_num_rows($iddisearch);
+								$iddisearchnr = dNr($iddisearch);
 							}while ($iddisearchnr > 0);							
 						$add_user = sprintf("INSERT INTO ".$tableparam." (type, valeur1, valeur2, valeur3, valeur4, valeur5, valeur6, valeur7, valeur8, valeur9, valeur10, valeur11, valeur12, valeur13, valeur14, valeur15) VALUES ('utilisateur', '".$iddi."', '".$_POST['nom']."', '".$_POST['prenom']."', '".$_POST['login-identificateurinscription']."', '".$mdp."', '".$_POST['privilege']."', '".$_POST['datepourinscriptionobligatoire']."', '".$_SESSION['prenom_user']." ".$_SESSION['nom_user']."', '', '', '', '', '', '', '')");
 								mysql_select_db($base, $connexion);
 									$resultadd_user = mysql_query($add_user, $connexion) or die(mysql_error());
-									echo('<center><img src="img/load.gif"><meta http-equiv="refresh" content="0; URL=identification.php?gestion=utilisateurs&type=glu&modiffaite=creation&idnewuser='.$iddi.'"></center>');
+									echo('<center><img src="themes/default/img/load.gif"><meta http-equiv="refresh" content="0; URL=identification.php?gestion=utilisateurs&type=glu&modiffaite=creation&idnewuser='.$iddi.'"></center>');
 			}else{echo('error 1');}
 		}else{die('error 2');}
 	}else if(isset($_POST['modifverifuser']) && ($_POST['modifverifuser'] == "csa")){
@@ -399,7 +382,7 @@ echo('?</strong></td><td><input type="checkbox" name="telephone" value="1"></td>
 			if(isset($_POST['prenom'])){$prenom=$_POST['prenom'];}else{$prenom="--";}
 		mysql_select_db($base, $connexion);
 		$recpamd = mysql_query('SELECT valeur5 FROM '.$tableparam.' WHERE type="utilisateur" AND valeur5="'.$_POST['pass'].'" AND valeur1="'.$_POST['id'].'" ORDER BY valeur1 DESC LIMIT 1');
-			if(!mysql_num_rows($recpamd)){
+			if(!dNr($recpamd)){
 				$varpost=$pass;
 				$password=hash('sha512', $varpost);
 					mysql_select_db($base, $connexion);
@@ -425,18 +408,18 @@ echo('?</strong></td><td><input type="checkbox" name="telephone" value="1"></td>
 				$nbrofstat++;
 					mysql_select_db($base, $connexion);
 					$nbrofstatsearch = mysql_query('SELECT * FROM '.$tableparam.' WHERE type="grade" AND valeur1="'.$nbrofstat.'"');
-					$nbrofstatsearchnr = mysql_num_rows($nbrofstatsearch);
+					$nbrofstatsearchnr = dNr($nbrofstatsearch);
 			}while ($nbrofstatsearchnr > 0);
 			$newidforstat = $nbrofstat;
 			$insertnewgrade = mysql_query("INSERT  INTO ".$tableparam." (type, valeur1, valeur2, valeur3, valeur4, valeur5, valeur6, valeur7, valeur8, valeur9, valeur10, valeur11, valeur12, valeur13, valeur14, valeur15, valeur16, valeur17, valeur18, valeur19, valeur20) VALUES ('grade', '".$newidforstat."', '".$_GET['ideven']."', '".$nds."', '".$_GET['tds']."', '".$cds."', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
 			if($insertnewgrade){
-			echo ('<center><img src="img/load.gif"><meta http-equiv="refresh" content="0; url=identification.php?gestion=choixeven&type=grades&even='.$_GET['ideven'].'&modiffaite=creation"></center>');
+			echo ('<center><img src="themes/default/img/load.gif"><meta http-equiv="refresh" content="0; url=identification.php?gestion=choixeven&type=grades&even='.$_GET['ideven'].'&modiffaite=creation"></center>');
 			}else{
 			echo('Une erreur est survenue, veuillez vous r&eacute;f&eacute;rer aux informations ci-dessous :<br />'.mysql_error().'');
 			}
 			}else{?>
-			<link rel="stylesheet" type="text/css" href="img/colorchoice.css" />
-<script type="text/javascript" src="img/colorchoice.js"></script>
+			<link rel="stylesheet" type="text/css" href="themes/default/img/colorchoice.css" />
+<script type="text/javascript" src="themes/default/img/colorchoice.js"></script>
 <script type="text/javascript">
 window.onload = function(){
  fctLoad();
@@ -453,7 +436,7 @@ window.onresize = function(){
 <td style="text-align: center;"><strong><font size="2" face="Arial, Helvetica, sans-serif">Nom du Statut</font></strong></td><td style="text-align: center;">
 <input type="text" name="nds" ></td></tr><tr><td style="text-align: center;"><strong><font size="2" face="Arial, Helvetica, sans-serif">Tarif du statut</font></strong></td>
 <td style="text-align: center;"><input type="text" name="tds" ></td></tr><tr><td style="text-align: center;"><strong><font size="2" face="Arial, Helvetica, sans-serif">Couleur du Statut</font></strong></td><td style="text-align: center;">
-<input type="text" name="cds" ><img src="img/colorchoice.png" width="32" height="19" border="0" align="absmiddle" onClick="fctShow(document.form1.cds);" style="cursor:pointer;"></td></tr></table><input name="bouton" type="submit" value="Cr&eacute;er"><input name="bouton" type="button" value="Annuler"></form></center>
+<input type="text" name="cds" ><img src="themes/default/img/colorchoice.png" width="32" height="19" border="0" align="absmiddle" onClick="fctShow(document.form1.cds);" style="cursor:pointer;"></td></tr></table><input name="bouton" type="submit" value="Cr&eacute;er"><input name="bouton" type="button" value="Annuler"></form></center>
 		<?php }} else if(isset($_GET['type']) && ($_GET['type'] == "evenements")){
 			if(isset($_GET['grade'])){
 }else if(isset($_GET['act']) && ($_GET['act'] == "modifoption")){// =1 >> On cherche la variable "act" égale à modifoption
@@ -467,50 +450,50 @@ window.onresize = function(){
 					//Vérification de la première requête pour mettre à jour la base de donnée
 					echo('<center><div style="background-color:#eeeeee; height=10px;">');
 						if(isset($fader0) && (!$fader0)){ // affichage erreur si ya
-							echo('<img src="img/erreur.png">'); //donc évidemment l'image
+							echo('<img src="themes/default/img/erreur.png">'); //donc évidemment l'image
 							echo(mysql_error()); // et le blabla
 							if(isset($_GET['noscript']) && ($_GET['noscript'] == "yes")){ // affichage de la pae d'erreur si noscript
-								echo('<img src="img/delete.png">&nbsp;&nbsp;<font color="#FF8000">Un erreur est survenue!</font><br /><br /><form action="identification.php?gestion=choixeven&type=evenements"><input type="submit" value="Ok..."></form>');
+								echo('<img src="themes/default/img/delete.png">&nbsp;&nbsp;<font color="#FF8000">Un erreur est survenue!</font><br /><br /><form action="identification.php?gestion=choixeven&type=evenements"><input type="submit" value="Ok..."></form>');
 							}else{ // si ya pas noscript on a déjà affiché l'image
 							} // fin des si noscript
 						}else{ // donc si ya pas derreur
 							if(isset($_GET['noscript']) && ($_GET['noscript'] == "yes")){ // avec noscript, on affiche la page : c bon !
-								echo('<img src="img/valider.png">&nbsp;&nbsp;<font color="#00B000">Op&eacute;ration execut&eacute;e avec succ&egrave;s!</font><br /><br /><form action="identification.php?gestion=choixeven&type=evenements"><input type="submit" value="Ok"></form>');
+								echo('<img src="themes/default/img/valider.png">&nbsp;&nbsp;<font color="#00B000">Op&eacute;ration execut&eacute;e avec succ&egrave;s!</font><br /><br /><form action="identification.php?gestion=choixeven&type=evenements"><input type="submit" value="Ok"></form>');
 							}else{ // si script activé on chage les imgs
 								if(isset($_GET['valeurchange']) && ($_GET['valeurchange'] == "valeur9")){ // valeur 9 ? ou pas.
 									if(isset($_GET['rotatechange']) && ($_GET['rotatechange'] == "1")){//Afficher la bonne image selon le type de paramètre modifié
-										echo('<div><a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur9&rotatechange=0&nomeven='.$_GET['nomeven'].'\', \'idfader-'.$_GET['nomeven'].'\')" target="_parent"><img src="img/valider.png"></a></div>');
+										echo('<div><a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur9&rotatechange=0&nomeven='.$_GET['nomeven'].'\', \'idfader-'.$_GET['nomeven'].'\')" target="_parent"><img src="themes/default/img/valider.png"></a></div>');
 									}else if(isset($_GET['rotatechange']) && ($_GET['rotatechange'] == "0")){
-										echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur9&rotatechange=1&nomeven='.$_GET['nomeven'].'\', \'idfader-'.$_GET['nomeven'].'\')" target="_parent"><img src="img/delete.png"></a>');
+										echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur9&rotatechange=1&nomeven='.$_GET['nomeven'].'\', \'idfader-'.$_GET['nomeven'].'\')" target="_parent"><img src="themes/default/img/delete.png"></a>');
 									}else{
-										echo('<img src="img/erreur.png">');
+										echo('<img src="themes/default/img/erreur.png">');
 									}
 								}else if(isset($_GET['valeurchange']) && ($_GET['valeurchange'] == "valeur10")){ // valeur 10 ? ou pas.
 									if(isset($_GET['rotatechange']) && ($_GET['rotatechange'] == "1")){//Afficher la bonne image selon le type de paramètre modifié
-										echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur10&rotatechange=0&nomeven='.$_GET['nomeven'].'\', \'idfadsr-'.$_GET['nomeven'].'\')" target="_parent"><img src="img/valider.png"></a>');
+										echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur10&rotatechange=0&nomeven='.$_GET['nomeven'].'\', \'idfadsr-'.$_GET['nomeven'].'\')" target="_parent"><img src="themes/default/img/valider.png"></a>');
 									}else if(isset($_GET['rotatechange']) && ($_GET['rotatechange'] == "0")){
-										echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur10&rotatechange=1&nomeven='.$_GET['nomeven'].'\', \'idfadsr-'.$_GET['nomeven'].'\')" target="_parent"><img src="img/delete.png"></a>');
+										echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur10&rotatechange=1&nomeven='.$_GET['nomeven'].'\', \'idfadsr-'.$_GET['nomeven'].'\')" target="_parent"><img src="themes/default/img/delete.png"></a>');
 									}else{
-										echo('<img src="img/erreur.png">');
+										echo('<img src="themes/default/img/erreur.png">');
 									}
 								}else if(isset($_GET['valeurchange']) && ($_GET['valeurchange'] == "valeur11")){ // valeur 11 ? ou pas.
 									if(isset($_GET['rotatechange']) && ($_GET['rotatechange'] == "1")){//Afficher la bonne image selon le type de paramètre modifié
-										echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur11&rotatechange=0&nomeven='.$_GET['nomeven'].'\', \'idfndrlr-'.$_GET['nomeven'].'\')" target="_parent"><img src="img/valider.png"></a>');
+										echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur11&rotatechange=0&nomeven='.$_GET['nomeven'].'\', \'idfndrlr-'.$_GET['nomeven'].'\')" target="_parent"><img src="themes/default/img/valider.png"></a>');
 									}else if(isset($_GET['rotatechange']) && ($_GET['rotatechange'] == "0")){
-										echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur11&rotatechange=1&nomeven='.$_GET['nomeven'].'\', \'idfndrlr-'.$_GET['nomeven'].'\')" target="_parent"><img src="img/delete.png"></a>');
+										echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur11&rotatechange=1&nomeven='.$_GET['nomeven'].'\', \'idfndrlr-'.$_GET['nomeven'].'\')" target="_parent"><img src="themes/default/img/delete.png"></a>');
 									}else{
-										echo('<img src="img/erreur.png">');
+										echo('<img src="themes/default/img/erreur.png">');
 									}
 								}else if(isset($_GET['valeurchange']) && ($_GET['valeurchange'] == "valeur12")){ // valeur 12 ? ou pas.
 									if(isset($_GET['rotatechange']) && ($_GET['rotatechange'] == "1")){//Afficher la bonne image selon le type de paramètre modifié
-										echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur12&rotatechange=0&nomeven='.$_GET['nomeven'].'\', \'idftdrlr-'.$_GET['nomeven'].'\')" target="_parent"><img src="img/valider.png"></a>');
+										echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur12&rotatechange=0&nomeven='.$_GET['nomeven'].'\', \'idftdrlr-'.$_GET['nomeven'].'\')" target="_parent"><img src="themes/default/img/valider.png"></a>');
 									}else if(isset($_GET['rotatechange']) && ($_GET['rotatechange'] == "0")){
-										echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur12&rotatechange=1&nomeven='.$_GET['nomeven'].'\', \'idftdrlr-'.$_GET['nomeven'].'\')" target="_parent"><img src="img/delete.png"></a>');
+										echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$_GET['id'].'&valeurchange=valeur12&rotatechange=1&nomeven='.$_GET['nomeven'].'\', \'idftdrlr-'.$_GET['nomeven'].'\')" target="_parent"><img src="themes/default/img/delete.png"></a>');
 									}else{
-										echo('<img src="img/erreur.png">');
+										echo('<img src="themes/default/img/erreur.png">');
 									}
 								}else{ // ou pas. =D
-									echo('<img src="img/erreur.png">');
+									echo('<img src="themes/default/img/erreur.png">');
 								}	
 							}
 						}
@@ -526,20 +509,20 @@ window.onresize = function(){
 					}else if(isset($_GET['valeurchange']) && ($_GET['valeurchange'] == "valeur12")){
 						echo("la valeur \"T&eacute;l&eacute;phone des responsables légaux requis\"");
 					}else{
-						echo('<img src="img/erreur.png">');
+						echo('<img src="themes/default/img/erreur.png">');
 					}
 					if(isset($_GET['rotatechange']) && ($_GET['rotatechange'] == "0")){
 						echo(' qui sera équivalente &agrave; "<font color="#FF0000">non</font>", apr&egrave;s la confirmation ?');
 					}else if(isset($_GET['rotatechange']) && ($_GET['rotatechange'] == "1")){
 						echo(' qui sera équivalente &agrave; "<font color="#00B000">oui</font>", apr&egrave;s la confirmation ?');
 					}else{
-						echo('<img src="img/erreur.png">');
+						echo('<img src="themes/default/img/erreur.png">');
 					}
 				echo('</br /><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$_GET['id'].'"><input name="valeurchange" type="hidden" value="'.$_GET['valeurchange'].'"><input name="rotatechange" type="hidden" value="'.$_GET['rotatechange'].'"><input name="valeurauto" type="hidden" value="ok"><input name="noscript" type="hidden" value="yes"><input type="submit" value="Ok, continuer..."></form><form action="identification.php?gestion=choixeven&type=evenements"><input type="submit" value="Annuler"></form></center>');
 				}
-			}else{echo('<img src="img/erreur.png">');}//=4
-		}else{echo('<img src="img/erreur.png">');}//=3
-	}else{echo('<img src="img/erreur.png">');}//=2
+			}else{echo('<img src="themes/default/img/erreur.png">');}//=4
+		}else{echo('<img src="themes/default/img/erreur.png">');}//=3
+	}else{echo('<img src="themes/default/img/erreur.png">');}//=2
 }else{//=1
 	if(isset($_GET['newtitre']) && ($_GET['id'])){ //change titre
 		$nettoyertitr = htmlentities($_GET['newtitre'], ENT_QUOTES);
@@ -547,10 +530,10 @@ window.onresize = function(){
 			//requête de mise à jour du titre
 			$reqprltrdleven=mysql_query('UPDATE '.$tableparam.' SET valeur2="'.$nettoyertitr.'" WHERE type="serveur" AND valeur1="'.$_GET['id'].'"');
 				if(isset($reqprltrdleven) && (!$reqprltrdleven)){
-					echo('<img src="img/erreur.png">'); 
+					echo('<img src="themes/default/img/erreur.png">'); 
 					echo(mysql_error());
 						if(isset($_GET['noscript']) && ($_GET['noscript'] == "yes")){
-							echo('<img src="img/delete.png">&nbsp;&nbsp;<font color="#FF8000">Un erreur est survenue!</font><br /><br /><form action="identification.php?gestion=choixeven&type=evenements"><input type="submit" value="Ok..."></form>');
+							echo('<img src="themes/default/img/delete.png">&nbsp;&nbsp;<font color="#FF8000">Un erreur est survenue!</font><br /><br /><form action="identification.php?gestion=choixeven&type=evenements"><input type="submit" value="Ok..."></form>');
 						}
 				}else{ // rien vu qui si ya une erreur ya l'image d'erreur
 				}
@@ -563,10 +546,10 @@ window.onresize = function(){
 					//requête de mise à jour du titre
 					$reqprnbrperswen=mysql_query('UPDATE '.$tableparam.' SET valeur8="'.$_GET['newnbrpers'].'" WHERE type="serveur" AND valeur1="'.$_GET['id'].'"');
 						if(isset($reqprnbrperswen) && (!$reqprnbrperswen)){
-							echo('<img src="img/erreur.png">'); 
+							echo('<img src="themes/default/img/erreur.png">'); 
 							echo(mysql_error());
 								if(isset($_GET['noscript']) && ($_GET['noscript'] == "yes")){
-									echo('<img src="img/delete.png">&nbsp;&nbsp;<font color="#FF8000">Un erreur est survenue!</font><br /><br /><form action="identification.php?gestion=choixeven&type=evenements"><input type="submit" value="Ok..."></form>');
+									echo('<img src="themes/default/img/delete.png">&nbsp;&nbsp;<font color="#FF8000">Un erreur est survenue!</font><br /><br /><form action="identification.php?gestion=choixeven&type=evenements"><input type="submit" value="Ok..."></form>');
 								}
 						}else{ // rien vu qui si ya une erreur ya l'image d'erreur
 						}
@@ -748,7 +731,7 @@ function changage(idag, typage, oldage){
 <?php
 mysql_select_db($base, $connexion);
 $tlu = mysql_query('SELECT valeur1, valeur2, valeur3, valeur4, valeur5, valeur6, valeur7, valeur8, valeur9, valeur10, valeur11, valeur12, valeur13, valeur14, valeur15 FROM '.$tableparam.' WHERE type="serveur" ORDER BY valeur1');
-	if(mysql_num_rows($tlu) == 0){ 
+	if(dNr($tlu) == 0){ 
 		echo ('<span id="messages"><div class="alert"><ul>Aucun &eacute;v&eacute;nement disponible !</ul></div></span>'); 
 	}else{?>
 		
@@ -768,10 +751,10 @@ $tlu = mysql_query('SELECT valeur1, valeur2, valeur3, valeur4, valeur5, valeur6,
   				$chaine = strtr($chaine,  "'\"",  "  "); 
   				return $chaine; 
   				} 
-					while($wtlu = mysql_fetch_array($tlu)){?>
+					while($wtlu = dFa($tlu)){?>
 						<?php
 				$titre=enlevecaracteres($wtlu['valeur2']);
-				if(isset($wtlu['valeur8']) && ($wtlu['valeur8'] == "0")){$pmax="<img src=\"img/infini.png\">";}else if(isset($wtlu['valeur8'])){$pmax=$wtlu['valeur8'];}else{$pmax="Aucune donn&eacute;e re&ccedil;ue!";} // préparation de la valeur pmax pour définir le nombre de personnes maximum
+				if(isset($wtlu['valeur8']) && ($wtlu['valeur8'] == "0")){$pmax="<img src=\"themes/default/img/infini.png\">";}else if(isset($wtlu['valeur8'])){$pmax=$wtlu['valeur8'];}else{$pmax="Aucune donn&eacute;e re&ccedil;ue!";} // préparation de la valeur pmax pour définir le nombre de personnes maximum
 				echo("<tr><td style=\"text-align: center;\">".$wtlu['valeur1']."</td>"); // affichage de l'id
 				echo("<td style=\"text-align: center;\"><div id=\"nom\"><input type=\"submit\" onclick=\"chatitr('".$wtlu['valeur1']."', '".$titre."')\" value='".$titre."'></input></form></div></td>"); //affichage du titre dans un bouton
 	 					
@@ -782,35 +765,35 @@ $tlu = mysql_query('SELECT valeur1, valeur2, valeur3, valeur4, valeur5, valeur6,
 				echo("<td style=\"text-align: center;\">".$ta."</td>"); // affichage de la tranche d'âge
 	  			echo("<td style=\"text-align: center;\"><div id=\"idfader-".$wtlu['valeur3']."\">"); // autorisation d'entrée requise ?
 	  				if(isset($wtlu['valeur9']) && ($wtlu['valeur9'] == "1")){
-						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur9&rotatechange=0&nomeven='.$wtlu['valeur3'].'\', \'idfader-'.$wtlu['valeur3'].'\')"><img src="img/valider.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur9"><input name="rotatechange" type="hidden" value="0"><input type="submit" value="Inverser"></form></noscript>');
+						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur9&rotatechange=0&nomeven='.$wtlu['valeur3'].'\', \'idfader-'.$wtlu['valeur3'].'\')"><img src="themes/default/img/valider.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur9"><input name="rotatechange" type="hidden" value="0"><input type="submit" value="Inverser"></form></noscript>');
 					}else if(isset($wtlu['valeur9']) && ($wtlu['valeur9'] == "0")){
-						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur9&rotatechange=1&nomeven='.$wtlu['valeur3'].'\', \'idfader-'.$wtlu['valeur3'].'\')"><img src="img/delete.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur9"><input name="rotatechange" type="hidden" value="1"><input type="submit" value="Inverser"></form></noscript>');
+						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur9&rotatechange=1&nomeven='.$wtlu['valeur3'].'\', \'idfader-'.$wtlu['valeur3'].'\')"><img src="themes/default/img/delete.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur9"><input name="rotatechange" type="hidden" value="1"><input type="submit" value="Inverser"></form></noscript>');
 					}else{
-						echo('<img src="img/erreur.png">');
+						echo('<img src="themes/default/img/erreur.png">');
 					}
 	  			echo("</div></td><td style=\"text-align: center;\"><div id=\"idfadsr-".$wtlu['valeur3']."\">"); // autorisation de sortie requise ?
 					if(isset($wtlu['valeur10']) && ($wtlu['valeur10'] == "1")){
-						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur10&rotatechange=0&nomeven='.$wtlu['valeur3'].'\', \'idfadsr-'.$wtlu['valeur3'].'\')"><img src="img/valider.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur10"><input name="rotatechange" type="hidden" value="0"><input type="submit" value="Inverser"></form></noscript>');
+						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur10&rotatechange=0&nomeven='.$wtlu['valeur3'].'\', \'idfadsr-'.$wtlu['valeur3'].'\')"><img src="themes/default/img/valider.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur10"><input name="rotatechange" type="hidden" value="0"><input type="submit" value="Inverser"></form></noscript>');
 					}else if(isset($wtlu['valeur10']) && ($wtlu['valeur10'] == "0")){
-						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur10&rotatechange=1&nomeven='.$wtlu['valeur3'].'\', \'idfadsr-'.$wtlu['valeur3'].'\')"><img src="img/delete.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur10"><input name="rotatechange" type="hidden" value="1"><input type="submit" value="Inverser"></form></noscript>');
+						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur10&rotatechange=1&nomeven='.$wtlu['valeur3'].'\', \'idfadsr-'.$wtlu['valeur3'].'\')"><img src="themes/default/img/delete.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur10"><input name="rotatechange" type="hidden" value="1"><input type="submit" value="Inverser"></form></noscript>');
 					}else{
-						echo('<img src="img/erreur.png">');
+						echo('<img src="themes/default/img/erreur.png">');
 					}
 				echo("</div></td><td style=\"text-align: center;\"><div id=\"idfndrlr-".$wtlu['valeur3']."\">"); // nom des repsonsables légaux requis ?
 					if(isset($wtlu['valeur11']) && ($wtlu['valeur11'] == "1")){
-						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur11&rotatechange=0&nomeven='.$wtlu['valeur3'].'\', \'idfndrlr-'.$wtlu['valeur3'].'\')"><img src="img/valider.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur11"><input name="rotatechange" type="hidden" value="0"><input type="submit" value="Inverser"></form></noscript>');
+						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur11&rotatechange=0&nomeven='.$wtlu['valeur3'].'\', \'idfndrlr-'.$wtlu['valeur3'].'\')"><img src="themes/default/img/valider.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur11"><input name="rotatechange" type="hidden" value="0"><input type="submit" value="Inverser"></form></noscript>');
 					}else if(isset($wtlu['valeur11']) && ($wtlu['valeur11'] == "0")){
-						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur11&rotatechange=1&nomeven='.$wtlu['valeur3'].'\', \'idfndrlr-'.$wtlu['valeur3'].'\')"><img src="img/delete.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur11"><input name="rotatechange" type="hidden" value="1"><input type="submit" value="Inverser"></form></noscript>');
+						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur11&rotatechange=1&nomeven='.$wtlu['valeur3'].'\', \'idfndrlr-'.$wtlu['valeur3'].'\')"><img src="themes/default/img/delete.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur11"><input name="rotatechange" type="hidden" value="1"><input type="submit" value="Inverser"></form></noscript>');
 					}else{
-						echo('<img src="img/erreur.png">');
+						echo('<img src="themes/default/img/erreur.png">');
 					}
 				echo("</div></td><td style=\"text-align: center;\"><div id=\"idftdrlr-".$wtlu['valeur3']."\">"); // tel des responsables légaux requis ?
 					if(isset($wtlu['valeur12']) && ($wtlu['valeur12'] == "1")){
-						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur12&rotatechange=0&nomeven='.$wtlu['valeur3'].'\', \'idftdrlr-'.$wtlu['valeur3'].'\')"><img src="img/valider.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur12"><input name="rotatechange" type="hidden" value="0"><input type="submit" value="Inverser"></form></noscript>');
+						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur12&rotatechange=0&nomeven='.$wtlu['valeur3'].'\', \'idftdrlr-'.$wtlu['valeur3'].'\')"><img src="themes/default/img/valider.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur12"><input name="rotatechange" type="hidden" value="0"><input type="submit" value="Inverser"></form></noscript>');
 					}else if(isset($wtlu['valeur12']) && ($wtlu['valeur12'] == "0")){
-						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur12&rotatechange=1&nomeven='.$wtlu['valeur3'].'\', \'idftdrlr-'.$wtlu['valeur3'].'\')"><img src="img/delete.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur12"><input name="rotatechange" type="hidden" value="1"><input type="submit" value="Inverser"></form></noscript>');
+						echo('<a onClick="fonction(\'identification.php?gestion=choixeven&type=evenements&act=modifoption&id='.$wtlu['valeur1'].'&valeurchange=valeur12&rotatechange=1&nomeven='.$wtlu['valeur3'].'\', \'idftdrlr-'.$wtlu['valeur3'].'\')"><img src="themes/default/img/delete.png"></a><noscript><br /><form action="identification.php?gestion=choixeven&type=evenements" method="get"><input name="act" type="hidden" value="modifoption"><input name="id" type="hidden" value="'.$wtlu['valeur1'].'"><input name="valeurchange" type="hidden" value="valeur12"><input name="rotatechange" type="hidden" value="1"><input type="submit" value="Inverser"></form></noscript>');
 					}else{
-						echo('<img src="img/erreur.png">');
+						echo('<img src="themes/default/img/erreur.png">');
 					}
 				echo("</div></td><td style=\"text-align: center;\"><form><input name=\"\" type=\"button\" onclick=\"self.location.href='identification.php?gestion=choixeven&type=grades&even=".$wtlu['valeur1']."'\" value=\"Administrer...\"></form></td></tr>");
 			}?>
@@ -821,7 +804,7 @@ $tlu = mysql_query('SELECT valeur1, valeur2, valeur3, valeur4, valeur5, valeur6,
 				$deletegrade = sprintf("DELETE FROM ".$tableparam." WHERE valeur1='".$_GET['idstatut']."' AND type='grade'"); //Requête pour supprimer grade
 				mysql_select_db($base, $connexion);
 					if(mysql_query($deletegrade, $connexion)){ //et on la balance
-						echo('<center><img src="img/load.gif"><meta http-equiv="refresh" content="0; URL=identification.php?gestion=choixeven&type=grades&even='.$_GET['even'].'&modiffaite=suppression"></center>');
+						echo('<center><img src="themes/default/img/load.gif"><meta http-equiv="refresh" content="0; URL=identification.php?gestion=choixeven&type=grades&even='.$_GET['even'].'&modiffaite=suppression"></center>');
 					}else{
 						echo('Une erreur est survenue, code d&eacute;boguage :<br />'.mysql_error().'');
 					}
@@ -829,11 +812,11 @@ $tlu = mysql_query('SELECT valeur1, valeur2, valeur3, valeur4, valeur5, valeur6,
 				if(isset($_GET['enregistrement']) && ($_GET['enregistrement'] == "nomodif")){
 					$modifadduser=mysql_query('UPDATE '.$tableparam.' SET valeur3="'.$_GET['nds'].'", valeur4="'.$_GET['tds'].'", valeur5="'.$_GET['cds'].'" WHERE valeur1="'.$_GET['idstatut'].'" AND type="grade" AND valeur2="'.$_GET['even'].'"');
 					echo(mysql_error());
-					echo('<center><img src="img/load.gif"><meta http-equiv="refresh" content="0; URL=identification.php?gestion=choixeven&type=grades&even='.$_GET['even'].'&modiffaite=modification"></center>');
+					echo('<center><img src="themes/default/img/load.gif"><meta http-equiv="refresh" content="0; URL=identification.php?gestion=choixeven&type=grades&even='.$_GET['even'].'&modiffaite=modification"></center>');
 					
 				}else{?>
-				<link rel="stylesheet" type="text/css" href="img/colorchoice.css" />
-<script type="text/javascript" src="img/colorchoice.js"></script>
+				<link rel="stylesheet" type="text/css" href="themes/default/img/colorchoice.css" />
+<script type="text/javascript" src="themes/default/img/colorchoice.js"></script>
 <script type="text/javascript">
 window.onload = function(){
  fctLoad();
@@ -851,7 +834,7 @@ var strColor = "<?php echo "#".$_GET['couleur']."";?>";
 <td style="text-align: center;"><strong><font size="2" face="Arial, Helvetica, sans-serif">Nom du Statut</font></strong></td><td style="text-align: center;">
 <input type="text" name="nds" value="<?php echo $_GET['titre'];?>"></td></tr><tr><td style="text-align: center;"><strong><font size="2" face="Arial, Helvetica, sans-serif">Tarif du statut</font></strong></td>
 <td style="text-align: center;"><input type="text" name="tds" value="<?php echo $_GET['tarif'];?>" ></td></tr><tr><td style="text-align: center;"><strong><font size="2" face="Arial, Helvetica, sans-serif">Couleur du statut</font></strong></td>
-<td style="text-align: center;"><input type="text" name="cds" id="cds" value="<?php echo "#".$_GET['couleur']."";?>" onFocus="this.style.backgroundColor=strColor" ><img src="img/colorchoice.png" width="32" height="19" border="0" align="absmiddle" onClick="fctShow(document.form1.cds);" style="cursor:pointer;"></td></tr></table><input name="bouton" type="submit" value="Modifier"><input onClick="self.location.href='identification.php?gestion=choixeven&type=grades&even=<?php echo $_GET['even'];?>'" value="Annuler" type="button" ></form></center>
+<td style="text-align: center;"><input type="text" name="cds" id="cds" value="<?php echo "#".$_GET['couleur']."";?>" onFocus="this.style.backgroundColor=strColor" ><img src="themes/default/img/colorchoice.png" width="32" height="19" border="0" align="absmiddle" onClick="fctShow(document.form1.cds);" style="cursor:pointer;"></td></tr></table><input name="bouton" type="submit" value="Modifier"><input onClick="self.location.href='identification.php?gestion=choixeven&type=grades&even=<?php echo $_GET['even'];?>'" value="Annuler" type="button" ></form></center>
 				<?php }
 				if(isset($_GET['idstatut'])){
 				}else if(isset($_POST['idstatut'])){
@@ -869,24 +852,24 @@ if(isset($_GET['modiffaite']) && ($_GET['modiffaite'] == "creation")){ echo('<sp
 <input name="" type="button" onClick="self.location.href='identification.php?gestion=choixeven&type=newgrades&ideven=<?php echo $_GET['even'];?>'" value="Cr&eacute;er un nouveau statut">
 </td></tr></tbody></table>
 	<center><br />
-		<?php if(mysql_num_rows($recherchesurlesgrades) == 0){}else{?>
+		<?php if(dNr($recherchesurlesgrades) == 0){}else{?>
 	<table class="statutsgestion" style="text-align: center; width: 75%; border-collapse : collapse; color:#000000;" border="1" cellpadding="0" cellspacing="0" bgcolor="#EEEEEE"><tbody><tr>
 		<td style="text-align: center;"><strong><u><font size="2" face="Arial, Helvetica, sans-serif">Nom du Statut</font></u></strong></td>
 		<td style="text-align: center;"><strong><u><font size="2" face="Arial, Helvetica, sans-serif">Tarif du Statut</font></u></strong></td>
 	 	<td style="text-align: center;"><strong><u><font size="2" face="Arial, Helvetica, sans-serif">Options</font></u></strong></td>
 	
 	<?php
-	while($wrslg = mysql_fetch_array($recherchesurlesgrades)){
+	while($wrslg = dFa($recherchesurlesgrades)){
 			if(isset($wrslg['valeur4']) == ($wrslg['valeur4'] == "0")){$tarifdustatut="<span style=\"color:#00C000;\">Gratuit</span>"; }else{$tarifdustatut="<span style=\"color:#0029C0;\">".$wrslg['valeur4']."€</span>";}
 			if(isset($wrslg['valeur4']) == ($wrslg['valeur5'] == "")){$cds="#F0F0F0"; }else{$cds=$wrslg['valeur5'];}
 		echo("<tr><td style=\"text-align: center;\"><span style=\"background:".$cds."\">".$wrslg['valeur3']."</span></td>"); // affichage du nom de statut
 		echo("<td style=\"text-align: center;\">".$tarifdustatut."</td>"); // affichage du nom de statut
-		echo("<td style=\"text-align: center;\"><span><a title=\"Modifier le statut\" href=\"identification.php?gestion=choixeven&type=grades&even=".$_GET['even']."&action=modifier&idstatut=".$wrslg['valeur1']."&titre=".$wrslg['valeur3']."&tarif=".$wrslg['valeur4']."&couleur=".substr($wrslg['valeur5'],1)."\"><img src=\"img/param.png\"></a></span>&nbsp;&nbsp;&nbsp;<span><a title=\"Supprimer le statut\" href=\"identification.php?gestion=choixeven&type=grades&even=".$_GET['even']."&action=supprimer&idstatut=".$wrslg['valeur1']."\"><img src=\"img/delete.png\"></a></span></td>");
+		echo("<td style=\"text-align: center;\"><span><a title=\"Modifier le statut\" href=\"identification.php?gestion=choixeven&type=grades&even=".$_GET['even']."&action=modifier&idstatut=".$wrslg['valeur1']."&titre=".$wrslg['valeur3']."&tarif=".$wrslg['valeur4']."&couleur=".substr($wrslg['valeur5'],1)."\"><img src=\"themes/default/img/param.png\"></a></span>&nbsp;&nbsp;&nbsp;<span><a title=\"Supprimer le statut\" href=\"identification.php?gestion=choixeven&type=grades&even=".$_GET['even']."&action=supprimer&idstatut=".$wrslg['valeur1']."\"><img src=\"themes/default/img/delete.png\"></a></span></td>");
 	}
 	?>
 	</tr></tbody></table>
 	<?php } ?>
-	<?php if(mysql_num_rows($recherchesurlesgrades) == 0){ 
+	<?php if(dNr($recherchesurlesgrades) == 0){ 
 		echo('<span id="messages"><div class="alert"><ul>Aucun statut disponible !</ul></div></span>'); 
 	}else{$infosgrd=""; }?></center>
 	<?php
@@ -912,7 +895,7 @@ if(isset($_GET['modiffaite']) && ($_GET['modiffaite'] == "creation")){ echo('<sp
 							echo $onbalancelasauceeven['valeur2'];
 								echo('</option>');
 						} while ($onbalancelasauceeven = mysql_fetch_assoc($querydesevenements));
-							$recherchedesevenements = mysql_num_rows($querydesevenements);
+							$recherchedesevenements = dNr($querydesevenements);
 								if($recherchedesevenements > 0) {
 									mysql_data_seek($querydesevenements, 0);
 									$onbalancelasauceeven = mysql_fetch_assoc($querydesevenements);}
@@ -926,7 +909,7 @@ if(isset($_GET['modiffaite']) && ($_GET['modiffaite'] == "creation")){ echo('<sp
 			$requetechangeserv=sprintf("SELECT * FROM ".$tableparam." WHERE valeur3='".$_POST['changeserv']."'");
 			$requetechangeservs1=mysql_query($requetechangeserv, $connexion) or die(mysql_error());
 			$varchangeserv=mysql_fetch_assoc($requetechangeservs1);
-			$opchangeserv=mysql_num_rows($requetechangeservs1);
+			$opchangeserv=dNr($requetechangeservs1);
 				if($opchangeserv){
 					$_SESSION['idbdd'] = $varchangeserv['valeur1'];
 	echo("<meta http-equiv=\"refresh\" content=\"0; URL=identification.php?option=ok\">");
@@ -937,7 +920,7 @@ if(isset($_GET['modiffaite']) && ($_GET['modiffaite'] == "creation")){ echo('<sp
 		echo('<select name="changeserv"><option value="newserveur">Nouveau Serveur</option><option disabled>- -</option>');
 						mysql_select_db($base, $connexion); 
 							$rechercheserveur=mysql_query('SELECT * FROM '.$tableparam.' WHERE type="serveur"'); 
-								while($datarechercheserveur = mysql_fetch_array($rechercheserveur)){ 
+								while($datarechercheserveur = dFa($rechercheserveur)){ 
 									echo("<option value=\"".$datarechercheserveur['valeur3']."\">".$datarechercheserveur['valeur2']."</option>");
 								}
 echo('</select></td></tr><tr><td height="30" colspan="2"><input type="submit" value="Connexion"></td></tr></table></form></center>');		
@@ -954,7 +937,7 @@ changeaffsiscript();
 					$rek2changemdpus=sprintf("SELECT * FROM ".$tableparam." WHERE valeur1='".$_POST['modifusersystemid']."' AND type='utilisateur'");
 					$rek2serv1changemdpus=mysql_query($rek2changemdpus, $connexion) or die(mysql_error());
 					$var2servchangemdpus=mysql_fetch_assoc($rek2serv1changemdpus);
-					$op2servchangemdpus=mysql_num_rows($rek2serv1changemdpus);
+					$op2servchangemdpus=dNr($rek2serv1changemdpus);
 				if($op2servchangemdpus > "0"){
 				if($var2servchangemdpus['valeur6'] == "sa"){ $superadminornot2 = "yes";
 				if($var2servchangemdpus['valeur1'] == $_SESSION['id_user']){}else{
@@ -976,7 +959,7 @@ changeaffsiscript();
 					$rek3changemdpus=sprintf("SELECT * FROM ".$tableparam." WHERE valeur1='".$_POST['modifusersystemact2id']."' AND type='utilisateur'");
 					$rek3serv1changemdpus=mysql_query($rek3changemdpus, $connexion) or die(mysql_error());
 					$var3servchangemdpus=mysql_fetch_assoc($rek3serv1changemdpus);
-					$op3servchangemdpus=mysql_num_rows($rek3serv1changemdpus);
+					$op3servchangemdpus=dNr($rek3serv1changemdpus);
 				if($op3servchangemdpus > "0"){
 				if($var3servchangemdpus['valeur6'] == "sa"){ $superadminornot3 = "yes";
 				if($var3servchangemdpus['valeur1'] == $_SESSION['id_user']){}else{
@@ -984,7 +967,7 @@ changeaffsiscript();
 					if($mdp1 == $mdp2){
 					echo('<center>Voulez-vous vraiment modifier le mot de passe de l\'utilisateur '.$var3servchangemdpus['valeur3'].' '.$var3servchangemdpus['valeur2'].' ?<br /><table style="text-align: center; width: 100%; margin-left: auto; margin-right: auto; background-color:#EEEEEE; color:black;" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align: top; text-align: center;"><span style="color:#C00000;">Pour confirmer la modification, vous devez taper votre mot de passe :</span><br /></center>');
 					echo('<div align="center"><form action="identification.php" method="post" name="modifusersystemact3"><input name="modifusersystemact3id" type="hidden" value="'.$var3servchangemdpus['valeur1'].'"><input name="modifusersystemact3mdp1" type="hidden" value="'.$mdp1.'"><input name="modifusersystemact3mdp2" type="hidden" value="'.$mdp2.'"><input name="modifusersystemact3mypass" type="password"><input name="" type="submit" value="Valider"></form></div></td></tr></table></center>');
-					}else{echo('<div align="center"><img src="img/erreur.png"> Attention, les deux mot de passe ne correspondent pas!<br /><form action="identification.php" method="get"><input name="gestion" type="hidden" value="utilisateurs"><input name="type" type="hidden" value="auu"><input name="act" type="hidden" value="modifpass"><input name="id" type="hidden" value="'.$var3servchangemdpus['valeur1'].'"><input name="nbr" type="hidden" value="bcl"><input name="" value="Retour à l\'étape 1" type="submit"></form></div>');}
+					}else{echo('<div align="center"><img src="themes/default/img/erreur.png"> Attention, les deux mot de passe ne correspondent pas!<br /><form action="identification.php" method="get"><input name="gestion" type="hidden" value="utilisateurs"><input name="type" type="hidden" value="auu"><input name="act" type="hidden" value="modifpass"><input name="id" type="hidden" value="'.$var3servchangemdpus['valeur1'].'"><input name="nbr" type="hidden" value="bcl"><input name="" value="Retour à l\'étape 1" type="submit"></form></div>');}
 		}else{ echo('<span id="messages"><div class="error"><ul>#AR0025 Arr&ecirc;t de la requ&ecirc;te : Aucun utilisateur appartenant &agrave; l\'id envoy&eacute; !</ul></div></span>'); }
 		}else{ echo('<span id="messages"><div class="error"><ul>#AIR012 Arr&ecirc;t inopin&eacute; de la requ&ecirc;te : Identifiant utilisateur maquant !</ul></div></span>'); }
 		}else{ echo('<span id="messages"><div class="error"><ul>#AR0042 Arr&ecirc;t de la requ&ecirc;te : Mot de passe de confirmation manquant !</ul></div></span>'); }
@@ -1002,7 +985,7 @@ changeaffsiscript();
 					$rek4changemdpus=sprintf("SELECT * FROM ".$tableparam." WHERE valeur1='".$_POST['modifusersystemact3id']."' AND type='utilisateur'");
 					$rek4serv1changemdpus=mysql_query($rek4changemdpus, $connexion) or die(mysql_error());
 					$var4servchangemdpus=mysql_fetch_assoc($rek4serv1changemdpus);
-					$op4servchangemdpus=mysql_num_rows($rek4serv1changemdpus);
+					$op4servchangemdpus=dNr($rek4serv1changemdpus);
 				if($op4servchangemdpus > "0"){
 				if($var4servchangemdpus['valeur1'] == $_SESSION['id_user']){$cmoioupa = "oui";}
 				if($var4servchangemdpus['valeur6'] == "sa"){ $superadminornot4 = "yes";
@@ -1022,7 +1005,7 @@ changeaffsiscript();
 									echo('<br /><span id="messages"><div class="error"><ul>Une erreur est survenue !<br />'.mysql_error().'</ul></div></span>');
 									}else{ echo('<br /><span id="messages"><div class="ok"><ul>Le changement du mot de passe s\'est ex&eacute;cut&eacute; avec succ&egrave;s pour l\'utilisateur '.$var4servchangemdpus['valeur3'].' '.$var4servchangemdpus['valeur2'].' ('.$var4servchangemdpus['valeur4'].').</ul></div></span><br /><div align="center"><input name="" type="button" onClick="parent.$.fancybox.close();" value="Terminé !"></div>'); }
 								}
-					}else{echo('<div align="center"><img src="img/erreur.png"> Attention, les deux mot de passe ne correspondent pas!<br /><form action="identification.php" method="get"><input name="gestion" type="hidden" value="utilisateurs"><input name="type" type="hidden" value="auu"><input name="act" type="hidden" value="modifpass"><input name="id" type="hidden" value="'.$var4servchangemdpus['valeur1'].'"><input name="nbr" type="hidden" value="bcl"><input name="" value="Retour à l\'étape 1" type="submit"></form></div>');}
+					}else{echo('<div align="center"><img src="themes/default/img/erreur.png"> Attention, les deux mot de passe ne correspondent pas!<br /><form action="identification.php" method="get"><input name="gestion" type="hidden" value="utilisateurs"><input name="type" type="hidden" value="auu"><input name="act" type="hidden" value="modifpass"><input name="id" type="hidden" value="'.$var4servchangemdpus['valeur1'].'"><input name="nbr" type="hidden" value="bcl"><input name="" value="Retour à l\'étape 1" type="submit"></form></div>');}
 		}else{ echo('<span id="messages"><div class="error"><ul>#AR0025 Arr&ecirc;t de la requ&ecirc;te : Aucun utilisateur appartenant &agrave; l\'id envoy&eacute; !</ul></div></span>'); }
 		}else{ echo('<span id="messages"><div class="error"><ul>#AIR012 Arr&ecirc;t inopin&eacute; de la requ&ecirc;te : Identifiant utilisateur maquant !</ul></div></span>'); }
 		}else{ echo('<span id="messages"><div class="error"><ul>#AR0042 Arr&ecirc;t de la requ&ecirc;te : Mot de passe de confirmation manquant !</ul></div></span>'); }}else{echo('<span id="messages"><div class="error"><ul>Le nouveau mot de passe et le mot de passe de confirmation ne correspondent pas !</ul></div></span>');}
@@ -1042,7 +1025,7 @@ changeaffsiscript();
 					echo('<center><form action="identification.php" method="post"><table width="400" border="0" align="center" cellpadding="5" cellspacing="0" bgcolor="#999999" style="text-align : center;"><tr><td width="109">Serveur</td><td width="180"><select name="servbdd"><option value="newserveur">Nouveau Serveur</option><option disabled>- -</option>');
 						mysql_select_db($base, $connexion); 
 							$rechercheserveur=mysql_query('SELECT * FROM '.$tableparam.' WHERE type="serveur"'); 
-								while($datarechercheserveur = mysql_fetch_array($rechercheserveur)){ 
+								while($datarechercheserveur = dFa($rechercheserveur)){ 
 									echo("<option value=\"".$datarechercheserveur['valeur3']."\">".$datarechercheserveur['valeur2']."</option>");
 								}
 				echo('</select></td></tr><tr><td width="109">Identifiant</td><td width="180"><input name="login" type="text"></td></tr><tr><td>Mot de passe</td><td><input name="pass" type="password"></td></tr><tr><td height="30" colspan="2"><input name="Input" type="submit" value="Ok"></td></tr></table></form></center>');
